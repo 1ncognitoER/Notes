@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>ssh2_test</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- 编码过滤器 -->
+	<filter>
+		<filter-name>CharsetEncodingFilter</filter-name>
+		<filter-class>com.jialin.filter.CharsetEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value> 
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharsetEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- 
+	配置spring资源
+	
+	Spring提供ServletContentListener的一个实现类ContextLoaderListener监听器，该类可以作为Listener使用，在启动
+	Tomcat容器的时候，该类的作用就是自动装载ApplicationContext的配置信息，如果没有设置contextConfigLocation的初始参
+	数则会使用默认参数WEB-INF路径下的application.xml文件。如果需要自定义读取多个配置文件或者修改默认路径，则可以在web.xml中
+	设置
+	 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:config/applicationContext-*.xml</param-value>
+	</context-param>
+
+	<!-- 将HibernateSession开关控制配置在Filter，保证一个请求一个session，并对lazy提供支持 -->
+	<filter>
+		<filter-name>OpenSessionInView</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenSessionInView</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 配置Struts2 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>struts-default.xml,struts-plugin.xml,/config/struts.xml</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+</web-app>

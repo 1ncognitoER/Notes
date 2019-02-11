@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource name = "dataSource" type = "javax.sql.DataSource" maxActive = "100" maxIdle = "10" maxWait = "3000" driverClassName = "oracle.jdbc.driver.OracleDriver" url = "jdbc:oracle:thin:@192.168.20.178:1521:ORCL" username = "hr" password = "000000"/>
+</Context>

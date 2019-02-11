@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!-- 重命名 -->
+  <typeAliases>
+		<typeAlias type="org.czy.bean.Car" alias="Car"/>
+		<typeAlias type="org.czy.bean.Collection" alias="Collection"/>
+		<typeAlias type="org.czy.bean.Image" alias="Image"/>
+		<typeAlias type="org.czy.bean.User" alias="User"/>
+  </typeAliases>
+  <!-- 映射文件 -->
+  <mappers>
+    <mapper resource="org/czy/mapper/carMapper.xml"/>
+    <mapper resource="org/czy/mapper/collectionMapper.xml"/>
+    <mapper resource="org/czy/mapper/userMapper.xml"/>
+  </mappers>
+</configuration>

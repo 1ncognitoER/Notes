@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- **Dao是个接口，不能创建对象，MapperFactoryBean负责通过代理实现接口并提供实例存放在Spring容器中 -->
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="ud">
+		<property name="mapperInterface" value="org.czy.dao.UserDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	<bean class="org.czy.serviceImpl.UserServiceImpl">
+		<property name="userDao" ref="ud"></property>
+	</bean>
+
+</beans>

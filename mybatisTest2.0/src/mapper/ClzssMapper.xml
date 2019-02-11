@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 命名空间改成Dao层接口的具体位置 这样可以省却实现Dao接口 -->
+<mapper namespace="dao.Dao">
+
+	<resultMap type="bean.Clzss" id="ClzssMap">
+		<!-- column:数据库中的列名，property：实体类中的属性名 id表示主键 result表示其他字段 -->
+		<id column="clzssid" property="clzssId" />
+		<result column="clzssname" property="clzssName" />
+		<result column="clzsscontent" property="clzssContent" />
+	</resultMap>
+	
+	<select id="selectAllClzss" resultMap="ClzssMap">
+		select * from clzss
+	</select>
+	<select id="selectClzssById" parameterType="int" resultMap="ClzssMap">
+		select * from clzss where clzssid = #{id}
+	</select>
+	<select id="deleteClzssById" parameterType="int" resultMap="ClzssMap">
+		delete from clzss where clzssid = #{id}
+	</select>
+	<select id="insertClzss" parameterType="Clzss">
+		insert into clzss values(#{clzssId},#{clzssName},#{clzssContent})
+	</select>
+	<update id="updateClzss" parameterType="Clzss">
+		update clzss set
+		clzssName=#{clzssName},clzssContent=#{clzssContent} where clzssId=#{clzssId}
+	</update>
+	
+
+</mapper>

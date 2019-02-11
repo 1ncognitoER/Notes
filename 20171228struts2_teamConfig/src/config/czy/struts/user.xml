@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 
+		package的name属性可以自定义，比如定义成模块的名称
+		namespace表示命名空间，可以自定义为相应模块 用于避免相同的请求名称
+		extends直接或者间接继承struts-default
+	 -->
+	<package name="user" namespace="/user" extends="struts-default">
+		<!-- 
+			name：是url请求名，不需要加后缀（如.action）
+			class：是处理url请求对应的Java类，class要求包名加类名，并且该类具有公共的无参构造器
+			method：是配置处理请求类（请求类为class表明的类）中的处理方法，默认为execute方法。方法要满足是公共的，返回值是String，无参，当通过Ajax无需刷新页面时可以用空void
+		 -->
+		<action name="logout" class="org.czy.action.LoginAction" method="logout">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="login" class="org.czy.action.LoginAction">
+			<!-- 当namespace自定义后，/success.jsp表示根路径下的success.jsp，不加斜杠会默认访问命名空间下的success.jsp即/user/success.jsp -->
+			<result name="success">/success.jsp</result>
+			<result name="failed">/login.jsp</result>
+		</action>
+		<action name="add" class="org.czy.action.AddAction">
+			<result>/index.jsp</result>
+		</action>
+	</package>
+</struts>

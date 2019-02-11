@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 方法一(推荐)	setter -->
+    <bean id="studentOne" class="bean.Student">
+        <property name="studentId" value="101"></property>
+        <property name="studentName" value="小楠"></property>
+    </bean>
+    
+	<!-- 方法二	constructor -->
+	<!--  scope="prototype"表示再获取对象时创建一个新对象	 autowire="default"表示自动填写 -->
+    <bean id="studentTwo" class="bean.Student" scope="prototype" autowire="default">
+    	<constructor-arg name="studentId" value="102"></constructor-arg>
+    	<constructor-arg name="studentName" value="小北"></constructor-arg>
+    </bean>
+	
+	<!-- 内嵌对象 -->
+	<bean id="studentThree" class="bean.Student">
+        <property name="studentId" value="101"></property>
+        <property name="studentName" value="小楠"></property>
+        
+        <property name="clzss">
+        	<bean class="bean.Clzss">
+        		<property name="clzssId" value="1"></property>
+        		<property name="clzssName" value="super"></property>
+        	</bean>
+        </property>
+    </bean>
+    
+    <!-- 引入对象 -->
+    <bean id="studentFour" class="bean.Student">
+        <property name="studentId" value="101"></property>
+        <property name="studentName" value="小楠"></property>
+        
+        <property name="clzss" ref="clzssOne"></property>
+    </bean>
+    <bean id="clzssOne" class="bean.Clzss">
+    	<property name="clzssId" value="1"></property>
+        <property name="clzssName" value="super"></property>
+    </bean>
+    
+    <!-- 内嵌集合 -->
+    <bean id="clzssTwo" class="bean.Clzss">
+    	<property name="clzssId" value="1"></property>
+        <property name="clzssName" value="super"></property>
+    	<property name="SList">
+    		<!--<list>
+	    		<value>hhh</value>
+	    		<value>sss</value>
+	    		<value>iii</value>
+    		</list> -->
+	    		
+    		<list>
+    			<!-- 方法一 -->
+	    		<bean class="bean.Student">
+	    			 <property name="studentId" value="102"></property>
+	        		 <property name="studentName" value="小北"></property>
+	    		</bean>
+	    		<!-- 方法二 -->
+	    		<ref bean="studentOne"/>
+    		</list>
+    		
+	    	<!-- <map>
+	    		<entry key="201" value="hhh"/>
+	    		<entry key="202" value="ggg"/>
+	    		<entry key="203" value="ttt"/>
+	    	</map> -->
+	    	
+	    	<!-- <set>
+	    		<bean>...</bean>
+	    	</set> -->
+	    	
+	    	<!-- <props>
+	    		<prop key="">...</prop>
+	    	</props> -->
+	    	
+    	</property>
+    </bean>
+
+</beans>

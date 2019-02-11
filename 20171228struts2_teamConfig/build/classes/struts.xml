@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 方法一：congstant用于配置struts属性；方法二：在src目录下新建struts.properties配置文件 -->
+	<!-- 设置编码格式，解决乱码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<!-- 自定义扩展名,login.do,同时需要在web.xml过滤器中新增 -->
+	<constant name="struts.action.extension" value="action,,do"/>
+	<!-- 打开开发者模式 -->
+	<constant name="struts.devMode" value="true"/>
+	<!-- 改变配置后，自动加载  前提需要将开发模式设置为true -->
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	
+	<!-- 引入各个子配置文件 用于团队协作 -->
+	<include file="config/czy/struts/user.xml"></include>
+	
+</struts>

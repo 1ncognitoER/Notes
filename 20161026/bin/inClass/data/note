@@ -1,0 +1,4 @@
+.getRootElement(); 获取xml的根节点
+.elements();获取根节点的字节点
+.attributeValue("String");获取属性的值
+.getText();获取节点的值
