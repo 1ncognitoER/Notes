@@ -1,0 +1,20 @@
+需在GItHub建立仓库
+
+//目标文件夹右击-Git Bash Here
+
+//初始化目录
+git init
+//添加目录下所有文件
+git add .
+//提交日志
+git commit -m "first commit"
+//连接仓库
+git remote add origin https://github.com/XXXXX/XXXXX.git
+//上传
+git push -u origin master
+
+
+文件更改提交后只是进入Git本地仓库，如需要同步至GitHub网站上，可采用如下操作：
+以idea为例：
+方法一：右击项目->Git->Repository->Push
+方法二：菜单栏VCS->Git->Push
